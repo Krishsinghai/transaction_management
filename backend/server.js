@@ -20,6 +20,9 @@ mongoose.connect('mongodb+srv://singhaikrish769:LzdMUeUnTuKyfF6Z@krishcluster.ax
 .catch(err => console.log('MongoDB connection error:', err));
 
 // Routes
+app.get('/', (req, res) => {
+    res.send('Backend is running!');
+});
 
 // Add a new transaction
 app.post('/transactions', async (req, res) => {
