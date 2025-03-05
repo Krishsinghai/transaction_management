@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const Transaction = require('./models/Transaction');
+const Budget = require('./models/Budget');
 
 const app = express();
 const PORT = 5000;
@@ -68,6 +69,58 @@ app.delete('/transactions/:id', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+// Set a budget for a category
+app.post('/budgets', async (req, res) => {
+    try {
+        const { category, amount, month, year } = req.body;
+        const newBudget = new Budget({ category, amount, month, year });
+        const savedBudget = await newBudget.save();
+        res.status(201).json(savedBudget);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
+// Get all budgets
+app.get('/budgets', async (req, res) => {
+    try {
+        const budgets = await Budget.find();
+        res.json(budgets);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Compare budgets with actual spending
+app.get('/budgets/comparison', async (req, res) => {
+    try {
+        const { month, year } = req.query;
+        const budgets = await Budget.find({ month, year });
+        const transactions = await Transaction.find({
+            date: {
+                $gte: new Date(`${year}-${month}-01`),
+                $lt: new Date(`${year}-${month + 1}-01`),
+            },
+        });
+
+        const comparison = budgets.map((budget) => {
+            const actualSpending = transactions
+                .filter((t) => t.category === budget.category)
+                .reduce((sum, t) => sum + t.amount, 0);
+            return {
+                category: budget.category,
+                budget: budget.amount,
+                actual: actualSpending,
+            };
+        });
+
+        res.json(comparison);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 
 // Start the server
 app.listen(PORT, () => {

@@ -25,7 +25,33 @@ body {
     color: #333;
     margin-bottom: 20px;
 }
+.budget-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
 
+.budget-form input,
+.budget-form select,
+.budget-form button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.spending-insights {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.spending-insights h3 {
+    margin-top: 0;
+}
 /* Form Styles */
 .transaction-form {
     display: flex;

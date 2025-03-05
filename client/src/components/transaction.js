@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import MonthlyExpensesChart from './MonthlyExpensesChart';
 import CategoryPieChart from './CategoryPieChart';
+import BudgetForm from './BudgetForm'; // New component
+import BudgetVsActualChart from './BudgetVsActualChart'; // New component
+import SpendingInsights from './SpendingInsights'; // New component
 import './Transaction.css';
 
 const Transaction = () => {
@@ -12,9 +15,12 @@ const Transaction = () => {
         category: 'Food',
     });
     const [editId, setEditId] = useState(null);
+    const [budgets, setBudgets] = useState([]); // State for budgets
+    const [comparison, setComparison] = useState([]); // State for budget vs actual comparison
 
     const categories = ['Food', 'Rent', 'Transportation', 'Entertainment', 'Utilities', 'Other'];
 
+    // Fetch transactions
     useEffect(() => {
         fetchTransactions();
     }, []);
@@ -30,11 +36,47 @@ const Transaction = () => {
         setTransactions(data);
     };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+    // Fetch budgets
+    const fetchBudgets = async () => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/budgets`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
+        });
+        const data = await response.json();
+        setBudgets(data);
     };
 
+    // Fetch budget vs actual comparison
+    const fetchComparison = async () => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/budgets/comparison?month=October&year=2023`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
+        });
+        const data = await response.json();
+        setComparison(data);
+    };
+
+    // Handle budget submission
+    const handleBudgetSubmit = async (budget) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/budgets`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
+            body: JSON.stringify(budget),
+        });
+        if (response.ok) {
+            fetchBudgets();
+            fetchComparison(); // Refresh comparison data
+        }
+    };
+
+    // Handle transaction form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -70,9 +112,11 @@ const Transaction = () => {
             fetchTransactions();
             setFormData({ amount: '', date: '', description: '', category: 'Food' });
             setEditId(null);
+            fetchComparison(); // Refresh comparison data after adding/editing a transaction
         }
     };
 
+    // Handle editing a transaction
     const handleEdit = (transaction) => {
         setFormData({
             amount: transaction.amount,
@@ -83,6 +127,7 @@ const Transaction = () => {
         setEditId(transaction._id);
     };
 
+    // Handle deleting a transaction
     const handleDelete = async (id) => {
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/transactions/${id}`, {
             method: 'DELETE',
@@ -90,12 +135,14 @@ const Transaction = () => {
                 'Access-Control-Allow-Origin': '*',
             },
         });
-        
+
         if (response.ok) {
             fetchTransactions();
+            fetchComparison(); // Refresh comparison data after deleting a transaction
         }
     };
 
+    // Calculate monthly expenses
     const calculateMonthlyExpenses = () => {
         const monthlyExpenses = {};
         transactions.forEach((transaction) => {
@@ -108,6 +155,7 @@ const Transaction = () => {
         return monthlyExpenses;
     };
 
+    // Calculate category expenses
     const calculateCategoryExpenses = () => {
         const categoryExpenses = {};
         transactions.forEach((transaction) => {
@@ -120,12 +168,17 @@ const Transaction = () => {
         return categoryExpenses;
     };
 
+    // Calculate total expenses
     const totalExpenses = transactions.reduce((total, transaction) => total + transaction.amount, 0);
+
+    // Get most recent transactions
     const mostRecentTransactions = transactions.slice(0, 5);
 
     return (
         <div className="transaction-app">
             <h1 className="transaction-heading">Transaction Tracker</h1>
+
+            {/* Transaction Form */}
             <form className="transaction-form" onSubmit={handleSubmit}>
                 <input type="number" name="amount" placeholder="Amount" value={formData.amount} onChange={handleInputChange} className="transaction-input" required />
                 <input type="date" name="date" value={formData.date} onChange={handleInputChange} className="transaction-input" required />
@@ -139,6 +192,11 @@ const Transaction = () => {
                     {editId ? 'Update' : 'Add'} Transaction
                 </button>
             </form>
+
+            {/* Budget Form */}
+            <BudgetForm onSubmit={handleBudgetSubmit} />
+
+            {/* Dashboard Summary */}
             <div className="dashboard-summary">
                 <div className="summary-card">
                     <h3>Total Expenses</h3>
@@ -153,8 +211,16 @@ const Transaction = () => {
                     </ul>
                 </div>
             </div>
+
+            {/* Charts */}
             <MonthlyExpensesChart data={calculateMonthlyExpenses()} />
             <CategoryPieChart data={calculateCategoryExpenses()} />
+            <BudgetVsActualChart data={comparison} />
+
+            {/* Spending Insights */}
+            <SpendingInsights comparison={comparison} />
+
+            {/* Transaction List */}
             <ul className="transaction-list">
                 {transactions.map((transaction) => (
                     <li key={transaction._id} className="transaction-item">
