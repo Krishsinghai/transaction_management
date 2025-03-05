@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "67c85567d38bbc93fec0a27e"
+  },
+  "amount": 4000,
+  "date": {
+    "$date": "2025-03-05T00:00:00.000Z"
+  },
+  "description": "We have to add some money",
+  "category": "Food",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c85583d38bbc93fec0a281"
+  },
+  "amount": 2000,
+  "date": {
+    "$date": "2025-02-05T00:00:00.000Z"
+  },
+  "description": "rent pe kharcha",
+  "category": "Rent",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c86cf73d0b05f5790a0c01"
+  },
+  "amount": 4000,
+  "date": {
+    "$date": "2025-01-01T00:00:00.000Z"
+  },
+  "description": "We have to add some money",
+  "category": "Entertainment",
+  "__v": 0
+}]

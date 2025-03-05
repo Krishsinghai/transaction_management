@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/expenseTracker', {
+mongoose.connect('mongodb+srv://singhaikrish769:LzdMUeUnTuKyfF6Z@krishcluster.axufc.mongodb.net/', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
