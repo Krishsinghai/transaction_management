@@ -1,188 +1,197 @@
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    background-color: #f4f4f9;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 .transaction-app {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px;
-    margin: 20px;
+    padding: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .transaction-heading {
     text-align: center;
-    color: #333;
+    color: #2c3e50;
     margin-bottom: 20px;
-}
-.budget-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
+    font-size: 24px;
 }
 
-.budget-form input,
-.budget-form select,
-.budget-form button {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.spending-insights {
-    background-color: #f9f9f9;
+/* Form Container */
+.form-container {
+    background-color: #fff;
     padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
-.spending-insights h3 {
+.form-container h3 {
     margin-top: 0;
+    font-size: 18px;
+    color: #2c3e50;
 }
-/* Form Styles */
+
 .transaction-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 20px;
 }
 
-.transaction-input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.transaction-input:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.transaction-button {
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.transaction-button:hover {
-    background-color: #0056b3;
-}
-
-/* Transaction List Styles */
-.transaction-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.transaction-item {
-    background-color: #f9f9f9;
+.transaction-form input,
+.transaction-form select,
+.transaction-form button {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.transaction-item span {
-    flex: 1;
-    color: #333;
-}
-
-.transaction-item button {
-    margin-left: 10px;
-    padding: 5px 10px;
     font-size: 14px;
-    background-color: #dc3545;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.transaction-form button {
+    background-color: #3498db;
+    color: white;
     border: none;
-    border-radius: 4px;
-    color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 16px;
 }
 
-.transaction-item button:hover {
-    background-color: #c82333;
+.transaction-form button:hover {
+    background-color: #2980b9;
 }
 
-.transaction-item button:first-of-type {
-    background-color: #ffc107;
-    color: #000;
+/* Summary Section */
+.summary-section {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
-.transaction-item button:first-of-type:hover {
-    background-color: #e0a800;
+.summary-section h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #2c3e50;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-    .transaction-app {
-        padding: 15px;
-    }
-
-    .transaction-form {
-        gap: 8px;
-    }
-
-    .transaction-input, .transaction-button {
-        font-size: 14px;
-    }
-
-    .transaction-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .transaction-item button {
-        margin-top: 10px;
-        width: 100%;
-    }
-}
 .dashboard-summary {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .summary-card {
-    background-color: #f9f9f9;
+    background-color: #ecf0f1;
     padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 48%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .summary-card h3 {
     margin-top: 0;
+    font-size: 16px;
+    color: #2c3e50;
 }
 
 .summary-card ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
-.summary-card ul li {
-    margin-bottom: 5px;
+.summary-card li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.summary-card button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.summary-card button:hover {
+    background-color: #c0392b;
+}
+.chart-container {
+    width: 100%;
+    height: 300px; /* Adjust height as needed */
+    margin-bottom: 20px;
+}
+/* Charts Section */
+.charts-section {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.charts-section h3,
+.charts-section h4 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.month-year-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.month-year-selector select,
+.month-year-selector input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Responsive Design */
+@media (min-width: 426px) {
+    .transaction-app {
+        padding: 20px;
+    }
+
+    .form-container,
+    .summary-section,
+    .charts-section {
+        padding: 20px;
+    }
+
+    .dashboard-summary {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .month-year-selector {
+        flex-direction: row;
+        align-items: center;
+    }
+    .chart-container {
+        height: 250px; /* Reduce height for smaller screens */
+    }
+    .month-year-selector select,
+    .month-year-selector input {
+        width: auto;
+    }
 }

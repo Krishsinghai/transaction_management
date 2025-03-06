@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const BudgetSchema = new mongoose.Schema({
     category: {
         type: String,
@@ -15,7 +14,7 @@ const BudgetSchema = new mongoose.Schema({
         required: true,
     },
     year: {
-        type: Number,
+        type: String,
         required: true,
     },
 });

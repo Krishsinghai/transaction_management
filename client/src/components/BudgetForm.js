@@ -4,11 +4,15 @@ const BudgetForm = ({ onSubmit }) => {
     const [formData, setFormData] = useState({
         category: 'Food',
         amount: '',
-        month: '',
-        year: '',
+        month: 'October', // Default month
+        year: '2023', // Default year
     });
 
     const categories = ['Food', 'Rent', 'Transportation', 'Entertainment', 'Utilities', 'Other'];
+    const months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -18,7 +22,7 @@ const BudgetForm = ({ onSubmit }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(formData);
-        setFormData({ category: 'Food', amount: '', month: '', year: '' });
+        setFormData({ category: 'Food', amount: '', month: 'October', year: '2023' });
     };
 
     return (
@@ -29,8 +33,12 @@ const BudgetForm = ({ onSubmit }) => {
                 ))}
             </select>
             <input type="number" name="amount" placeholder="Amount" value={formData.amount} onChange={handleInputChange} required />
-            <input type="text" name="month" placeholder="Month (e.g., October)" value={formData.month} onChange={handleInputChange} required />
-            <input type="number" name="year" placeholder="Year (e.g., 2023)" value={formData.year} onChange={handleInputChange} required />
+            <select name="month" value={formData.month} onChange={handleInputChange} required>
+                {months.map((month) => (
+                    <option key={month} value={month}>{month}</option>
+                ))}
+            </select>
+            <input type="text" name="year" placeholder="Year" value={formData.year} onChange={handleInputChange} required />
             <button type="submit">Set Budget</button>
         </form>
     );
