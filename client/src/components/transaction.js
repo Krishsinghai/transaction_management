@@ -5,6 +5,7 @@ import BudgetForm from './BudgetForm';
 import BudgetVsActualChart from './BudgetVsActualChart';
 import SpendingInsights from './SpendingInsights';
 import './Transaction.css';
+require('dotenv').config();
 
 const Transaction = () => {
     const [transactions, setTransactions] = useState([]);

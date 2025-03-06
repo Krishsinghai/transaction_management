@@ -1,5 +1,6 @@
 import React from 'react';
 import Transaction from './components/transaction';
+require('dotenv').config();
 
 function App() {
     return (
