@@ -20,7 +20,6 @@ if (process.env.MONGO_URI) {
     console.log("dotenv failed to load.");
 }
 
-
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -31,7 +30,11 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Routes
 app.get('/', (req, res) => {
-    res.send('Backend is running on Vercel!');
+    const connectionStatus = mongoose.connection.readyState === 1 
+        ? 'Connected to MongoDB Atlas' 
+        : 'Failed to connect to MongoDB Atlas';
+
+    res.send(`Backend is running on Vercel! <br> MongoDB Status: ${connectionStatus}`);
 });
 
 // Add a new transaction

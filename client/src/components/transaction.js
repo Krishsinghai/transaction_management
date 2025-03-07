@@ -19,7 +19,7 @@ const Transaction = () => {
     const [selectedMonth, setSelectedMonth] = useState('October');
     const [selectedYear, setSelectedYear] = useState('2023');
 
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+    const API_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
 
     const categories = ['Food', 'Rent', 'Transportation', 'Entertainment', 'Utilities', 'Other'];
     const months = [
