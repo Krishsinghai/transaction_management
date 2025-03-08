@@ -21,7 +21,7 @@ if (process.env.MONGO_URI) {
 }
 
 // MongoDB Connection
-mongoose.connect('mongodb+srv://singhaikrish769:LzdMUeUnTuKyfF6Z@krishcluster.axufc.mongodb.net/', {
+mongoose.connect('mongodb+srv://singhaikrish769:LzdMUeUnTuKyfF6Z@krishcluster.axufc.mongodb.net/test', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
