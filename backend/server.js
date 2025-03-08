@@ -21,11 +21,11 @@ if (process.env.MONGO_URI) {
 }
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect('mongodb+srv://singhaikrish769:LzdMUeUnTuKyfF6Z@krishcluster.axufc.mongodb.net/', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-.then(() => console.log('MongoDB connected to Atlas'))
+.then(() => console.log('MongoDB connected'))
 .catch(err => console.log('MongoDB connection error:', err));
 
 // Routes
